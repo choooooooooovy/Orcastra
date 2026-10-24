@@ -69,8 +69,11 @@ src/orcastra/risk.py            synchronous code-based risk guard
 src/orcastra/storage.py         separate immutable artifact stores
 src/orcastra/service.py         orchestration boundary
 docs/architecture.md            components and data flow
+docs/development_workflow.md    Coordinator/subagent development harness
 docs/evaluation_contract.md     evaluator-facing contract and open questions
 docs/tradingagents_analysis.md  upstream v0.7.0 reuse/gap analysis
+docs/tasks/                     durable Task Briefs and completion evidence
+.codex/agents/reviewer.toml     independent project-scoped review role
 ```
 
 ## Design sources

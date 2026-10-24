@@ -31,6 +31,33 @@
 - Tests must be offline and deterministic by default. Mark external-service
   checks explicitly as integration tests.
 
+## Development workflow
+
+- Use `docs/development_workflow.md` for work that changes product behavior,
+  shared contracts, architecture, or more than one implementation area. Small,
+  low-risk documentation or mechanical changes may use the lightweight path.
+- Start scoped work from a Task Brief containing the goal, relevant files,
+  confirmed constraints, non-goals, acceptance criteria, and validation commands.
+- The main agent acts as Coordinator: it owns scope, delegation, decisions,
+  integration, and the final evidence-based handoff.
+- Use the built-in Explorer for focused read-only code mapping when the change
+  path is unclear. Give it only the Task Brief and relevant repository paths;
+  require a concise evidence summary rather than raw logs.
+- Use one Worker as the sole writer for a shared set of files. Parallel Workers
+  are allowed only for disjoint file ownership with an explicit integration plan.
+- Have an independent Reviewer assess the Task Brief, actual diff, and test
+  evidence. The Reviewer reports findings and a verdict but does not edit files.
+- Create a fresh Debugger subagent only after a reproducible failure. Give it the
+  failing command, trimmed error output, and related files; keep diagnosis and
+  implementation separate unless the fix is trivial and explicitly reassigned.
+- Subagents inherit the parent sandbox and permissions. “Read-only” is an
+  operating instruction, not a separate security boundary; the Coordinator must
+  inspect the final diff and working tree.
+- Do not pass full chat histories or unfiltered debug logs between roles. Use the
+  handoff fields defined in `docs/development_workflow.md`.
+- Record validated implementation evidence in the Task Brief or PR. Do not copy
+  speculative discussion into architecture or contract documentation.
+
 ## Required checks
 
 Run before handoff:
@@ -40,4 +67,3 @@ python -m pytest
 python -m ruff check .
 python -m orcastra run-mock --ticker AAPL --output artifacts
 ```
-
